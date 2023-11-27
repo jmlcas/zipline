@@ -2,28 +2,14 @@ version: '3.3'
 
 services:
 
-  postgres:
-    image: postgres:15
-    restart: unless-stopped
-    environment:
-      - POSTGRES_USER=User
-      - POSTGRES_PASSWORD=p4ssw0rd
-      - POSTGRES_DATABASE=postgres
-    volumes:
-      - ./pg_data:/var/lib/postgresql/data
-
-
   zipline:
     image: ghcr.io/diced/zipline
     ports:
-      - '3000:3000'
+      - '8200:3000'
     restart: unless-stopped
     environment:
-      - MFA_TOTP_ENABLED=true
-      - WEBSITE_SHOW_FILES_PER_USER=true
-      - WEBSITE_TITLE=Noted.lol
       - CORE_RETURN_HTTPS=false
-      - CORE_SECRET=C9dde56j8fCWLo9000XcgW
+      - CORE_SECRET=my_secret_cambiar
       - CORE_HOST=0.0.0.0
       - CORE_PORT=3000
       - CORE_DATABASE_URL=postgres://User:p4ssw0rd@postgres/postgres
@@ -34,3 +20,12 @@ services:
     depends_on:
       - postgres
 
+  postgres:
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=User
+      - POSTGRES_PASSWORD=p4ssw0rd
+      - POSTGRES_DATABASE=postgres
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
