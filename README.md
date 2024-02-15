@@ -1,5 +1,5 @@
 # zipline
-Zipline - Servidor documentos - Docker compose
+Zipline - Gestión documental - Docker compose
 
 Ver en "localhost:8200"
 
